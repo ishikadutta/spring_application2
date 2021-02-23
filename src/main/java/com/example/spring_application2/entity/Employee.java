@@ -2,9 +2,12 @@ package com.example.spring_application2.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
 //import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
+//import org.springframework.data.mongodb.core.mapping.Document;
+//import org.springframework.data.mongodb.core.mapping.MongoId;
 
 //import javax.persistence.Entity;
 //import javax.persistence.GeneratedValue;
@@ -14,12 +17,14 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 //@Entity
 @Getter
 @Setter
-@Document
+//@Document
+@RedisHash
 public class Employee {
 //    @Id
 //    @GenericGenerator(name="employee_id_seq", strategy="increment")
 //    @GeneratedValue(generator = "employee_id_seq",strategy = GenerationType.AUTO)
-    @MongoId
+   // @MongoId
+    @Id
     private Long id;
     private String name;
     private String departmentName;

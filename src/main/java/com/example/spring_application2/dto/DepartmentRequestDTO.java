@@ -1,12 +1,12 @@
 package com.example.spring_application2.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-public class EmployeeRequestDTO {
-    private long id;
+
+@Data
+public class DepartmentRequestDTO {
+    private Long id;
     private String name;
-    private DepartmentRequestDTO department;
 }

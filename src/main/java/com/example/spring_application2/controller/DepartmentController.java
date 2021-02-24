@@ -1,0 +1,28 @@
+package com.example.spring_application2.controller;
+
+
+import com.example.spring_application2.dto.DepartmentRequestDTO;
+import com.example.spring_application2.dto.DepartmentResponseDTO;
+import com.example.spring_application2.entity.Department;
+import com.example.spring_application2.service.DepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+
+@RequestMapping("/department")
+public class DepartmentController {
+    @Autowired
+    private DepartmentService departmentService;
+
+@PostMapping
+    public DepartmentResponseDTO createDepartment(@RequestBody DepartmentRequestDTO departmentRequestDTO){
+    return departmentService.createDepartment(departmentRequestDTO);
+}
+@GetMapping("/{id}")
+public Department getDepartment(@PathVariable("id") Long id){
+    return departmentService.getDepartmentById(id);
+}
+
+
+}

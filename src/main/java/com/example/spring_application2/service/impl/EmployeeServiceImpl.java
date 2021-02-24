@@ -10,6 +10,7 @@ import com.example.spring_application2.repository.EmployeeRepository;
 import com.example.spring_application2.service.EmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -128,5 +129,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 
        }
        return employeeResponseDTOSList;
+    }
+
+    @Override
+    public List<EmployeeResponseDTO> getMostExperienced() {
+        List<Employee> employeeList = employeeRepository.findAllUsers(Sort.by("yearsOfExperience"));
+        int length = employeeList.size();
+        int maxYear = employeeList.get(length - 1).getYearsOfExperience();
+        List<Employee> listOfMaxExperience = new ArrayList<>();
+        for(Employee employee: employeeList){
+            int experience = employee.getYearsOfExperience();
+            if(experience== maxYear){
+                listOfMaxExperience.add(employee);
+            }
+        }
+        List<EmployeeResponseDTO> employeeResponseDTOSList = new ArrayList<>();
+        for(Employee employee:listOfMaxExperience){
+            EmployeeResponseDTO responseDTO = new EmployeeResponseDTO();
+            BeanUtils.copyProperties(employee,responseDTO);
+            responseDTO.setDepartmentFromEntity(employee.getDepartment());
+            employeeResponseDTOSList.add(responseDTO);
+        }
+
+        return employeeResponseDTOSList;
     }
 }

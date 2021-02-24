@@ -2,6 +2,7 @@ package com.example.spring_application2.repository;
 
 import com.example.spring_application2.entity.Department;
 import com.example.spring_application2.entity.Employee;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -26,4 +27,9 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     @Query(value = "SELECT * FROM employee e WHERE e.department_id= ?1", nativeQuery =true)
     List<Employee> getEmployeeListByNativeQuery(Long departmentId);
+
+    @Query(value="SELECT e FROM Employee e")
+    List<Employee> findAllUsers(Sort sort);
+
+
 }

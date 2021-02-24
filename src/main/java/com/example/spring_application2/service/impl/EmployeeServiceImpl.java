@@ -22,7 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
     @Autowired
     private DepartmentRepository departmentRepository;
-
+    @Override
     public EmployeeResponseDTO createEmployee(EmployeeRequestDTO employeeRequestDTO){
         Employee employee = new Employee();
 

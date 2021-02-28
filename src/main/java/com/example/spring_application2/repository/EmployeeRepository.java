@@ -31,5 +31,8 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     @Query(value="SELECT e FROM Employee e")
     List<Employee> findAllUsers(Sort sort);
 
+    @Query(value="select * from Employee e where e.years_of_experience=(select MAX(years_of_experience) from Employee e)",nativeQuery = true)
+    List<Employee> findMostExperiencedEmployee();
+
 
 }

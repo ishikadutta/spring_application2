@@ -133,24 +133,34 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeResponseDTO> getMostExperienced() {
-        List<Employee> employeeList = employeeRepository.findAllUsers(Sort.by("yearsOfExperience"));
-        int length = employeeList.size();
-        int maxYear = employeeList.get(length - 1).getYearsOfExperience();
-        List<Employee> listOfMaxExperience = new ArrayList<>();
+      //  List<Employee> employeeList = employeeRepository.findAllUsers(Sort.by("yearsOfExperience"));
+//        int length = employeeList.size();
+//        int maxYear = employeeList.get(length - 1).getYearsOfExperience();
+//        List<Employee> listOfMaxExperience = new ArrayList<>();
+//        for(Employee employee: employeeList){
+//            int experience = employee.getYearsOfExperience();
+//            if(experience== maxYear){
+//                listOfMaxExperience.add(employee);
+//            }
+//        }
+//        List<EmployeeResponseDTO> employeeResponseDTOSList = new ArrayList<>();
+//        for(Employee employee:listOfMaxExperience){
+//            EmployeeResponseDTO responseDTO = new EmployeeResponseDTO();
+//            BeanUtils.copyProperties(employee,responseDTO);
+//            responseDTO.setDepartmentFromEntity(employee.getDepartment());
+//            employeeResponseDTOSList.add(responseDTO);
+//        }
+
+        List<EmployeeResponseDTO> employeeResponseDTOS = new ArrayList<>();
+        List<Employee> employeeList = employeeRepository.findMostExperiencedEmployee();
         for(Employee employee: employeeList){
-            int experience = employee.getYearsOfExperience();
-            if(experience== maxYear){
-                listOfMaxExperience.add(employee);
-            }
-        }
-        List<EmployeeResponseDTO> employeeResponseDTOSList = new ArrayList<>();
-        for(Employee employee:listOfMaxExperience){
             EmployeeResponseDTO responseDTO = new EmployeeResponseDTO();
             BeanUtils.copyProperties(employee,responseDTO);
             responseDTO.setDepartmentFromEntity(employee.getDepartment());
-            employeeResponseDTOSList.add(responseDTO);
+            employeeResponseDTOS.add(responseDTO);
         }
 
-        return employeeResponseDTOSList;
+        return employeeResponseDTOS;
     }
+
 }
